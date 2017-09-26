@@ -1,0 +1,12 @@
+## Copy the contents of this file and place them inside your server.cfg file before you load the resource.
+
+set vb_enable_pvp false                                                             #Allow PVP?
+set vb_disable_wanted_level true                                                    #Disable wanted level for everyone.
+set vb_disable_emergency_services true                                              #Stop NPC police, ambulance and fire trucks from responding to events. (Does not disable wanted level).
+set vb_force_god_mode_enabled true                                                  #Should godmode be enabled for everyone, no matter what? If true, you might as well set 'enablePVP' to false to improve performance.
+set vb_enable_welcome_message true                                                  #Should players who join the server receive a welcome message?
+set vb_make_welcome_message_global false                                            #Set to true if you want everyone to see the message, leave at false to only send the message to the new player.
+set vb_welcome_message "Hello {player}, welcome to the server!"                     #The welcome message sent to joining players. (player) will be replaced with the player name.
+set vb_enable_whitelist true                                                        #Should the whitelist be enabled?
+set vb_whitelist_kick_message "Sorry, you are not whitelisted!"                     #Custom kick message for when the player is not whitelisted.
+set vb_whitelist "steam:110000105959047;license:0546489720234464684;ip:127.0.0.1"   #IP's work, but are not recommended for a secure whitelist. Split every license using a semicolon.

@@ -1,11 +1,48 @@
--------------- NO NEED TO TOUCH ANYTHING, CHANGE THE vBasic_settings.lua FILE INSTEAD! --------------
+-------------- NO NEED TO TOUCH ANYTHING, CHANGE THE CONVARS IN YOUR server.cfg FILE INSTEAD! --------------
+local settings = {}
+settings.enablePVP = GetConvar("vb_enable_pvp", "false")
+settings.disableWantedLevel = GetConvar('vb_disable_wanted_level', "true")
+settings.disableEmergencyServices = GetConvar('vb_disable_emergency_services', "true")
+settings.forceGodModeEnabled = GetConvar('vb_force_god_mode_enabled', "true")
+settings.enableWelcomeMessage = GetConvar('vb_enable_welcome_message', "true")
+settings.makeWelcomeMessageGlobal = GetConvar('vb_make_welcome_message_global', "false")
+settings.welcomeMessage = GetConvar('vb_welcome_message', 'Hello {player}, welcome to the server!')
+settings.enableWhitelist = GetConvar('vb_enable_whitelist', "false")
+settings.whitelistKickMessage = GetConvar('vb_whitelist_kick_message', 'Sorry, you are not whitelisted!')
+local whitelist = GetConvar('vb_whitelist', "steam:110000105959047;license:0546489720234464684;ip:127.0.0.1")
+
+
+function sendClientData ()
+    TriggerClientEvent('sendData', -1, settings)
+end
+Citizen.CreateThread(function() -- needs to be sent multiple times with delays because of a bug
+    Citizen.Wait(1000)
+    sendClientData()
+    Citizen.Wait(1000)
+    sendClientData()
+end)
+
+
+function stringsplit(inputstr, sep)
+    if sep == nil then
+        sep = "%s"
+    end
+    local t={} ; i=1
+    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+        t[i] = str
+        i = i + 1
+    end
+    return t
+end
+whitelist = stringsplit(whitelist, ';')
+
 RegisterServerEvent('sendWelcomeMessage')
 AddEventHandler('sendWelcomeMessage', function(welcomeMsg)
     TriggerClientEvent('chatMessage', -1, '', {255,255,255}, welcomeMsg)
 end)
 
 function isWhitelisted(source)
-    if settings.enableWhitelist then
+    if settings.enableWhitelist == "true" then
         local whitelisted = false
         local playerIds = GetPlayerIdentifiers(source)
         for sourceId in pairs(playerIds) do
@@ -15,33 +52,28 @@ function isWhitelisted(source)
                 end
             end
         end
-        print('whitelist enabled')
         return whitelisted
     else
-        print('whitelist not enabled')
         return true
     end
 end
 
 AddEventHandler('playerConnecting', function(playerName, setKickReason)
+    TriggerClientEvent('loadClientSettings', -1, settings)
     local isPlayerOnWhitelist = isWhitelisted(source)
     if (isPlayerOnWhitelist == false) then
         setKickReason(settings.whitelistKickMessage)
         CancelEvent()
     end
-end)
-RegisterCommand('test', function(source)
-    for i in pairs(GetPlayerIdentifiers(source)) do
-        print(GetPlayerIdentifiers(source)[i])
-    end
+    Citizen.Wait(5000)-- needs to be sent multiple times with delays because of a bug
+    sendClientData()
+    Citizen.Wait(5000)
+    sendClientData()
+    Citizen.Wait(5000)
+    sendClientData()
+    Citizen.Wait(5000)
+    sendClientData()
 end)
 
-function printSettings()
-    print(string.format('\n\r---- vBasic Settings Loaded ----\nPVP enabled: %s\nWanted level disabled: %s\nEmergency services disabled: %s\nGod mode enabled: %s\nWhitelist enabled: %s\nWelcome message enabled: %s\nMake welcome message global: %s\n---- vBasic Settings Loaded ----\n\r', settings.enablePVP, settings.disableWantedLevel, settings.disableEmergencyServices, settings.forceGodModeEnabled, settings.enableWhitelist, settings.enableWelcomeMessage, settings.makeWelcomeMessageGlobal))
-end
 
-Citizen.CreateThread(function()
-    Citizen.Wait(500)
-    printSettings()
-end)
------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
