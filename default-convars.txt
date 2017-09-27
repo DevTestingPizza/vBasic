@@ -10,3 +10,8 @@ set vb_welcome_message "Hello {player}, welcome to the server!"                 
 set vb_enable_whitelist true                                                        #Should the whitelist be enabled?
 set vb_whitelist_kick_message "Sorry, you are not whitelisted!"                     #Custom kick message for when the player is not whitelisted.
 set vb_whitelist "steam:110000105959047;license:0546489720234464684;ip:127.0.0.1"   #IP's work, but are not recommended for a secure whitelist. Split every license using a semicolon.
+set vb_enable_crowd_control false                                                   #Setting this to true will most likely cause conflicts with ACL!!!!
+set vb_enable_traffic_control false                                                 #Setting this to true will most likely cause conflicts with ACL!!!!
+set vb_crowd_density 1.0                                                            #Valid numbers are from 0.0 to 1.0
+set vb_traffic_density 1.0                                                          #Valid numbers are from 0.0 to 1.0
+set vb_enable_unlimited_stamina true                                                #Enable unlimited stamina? recommended to keep this true

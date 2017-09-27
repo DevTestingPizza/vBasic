@@ -9,6 +9,11 @@ settings.makeWelcomeMessageGlobal = GetConvar('vb_make_welcome_message_global', 
 settings.welcomeMessage = GetConvar('vb_welcome_message', 'Hello {player}, welcome to the server!')
 settings.enableWhitelist = GetConvar('vb_enable_whitelist', "false")
 settings.whitelistKickMessage = GetConvar('vb_whitelist_kick_message', 'Sorry, you are not whitelisted!')
+settings.trafficDensity = GetConvar('vb_traffic_density', '1.0')
+settings.crowdDensity = GetConvar('vb_crowd_density', '1.0')
+settings.enableCrowdControl = GetConvar('vb_enable_crowd_control', 'false')
+settings.enableTrafficControl = GetConvar('vb_enable_traffic_control', 'false')
+settings.enableUnlimitedStamina = GetConvar('vb_enable_unlimited_stamina', 'true')
 local whitelist = GetConvar('vb_whitelist', "steam:110000105959047;license:0546489720234464684;ip:127.0.0.1")
 
 

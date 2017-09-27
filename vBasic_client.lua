@@ -31,6 +31,7 @@ Citizen.CreateThread(function()
         end)
     end
 end)
+
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
@@ -40,6 +41,17 @@ Citizen.CreateThread(function()
         if (settings.forceGodModeEnabled == "true") and ((GetPlayerInvincible() == false)  or (GetEntityHealth(GetPlayerPed(PlayerId())) < 200)) then
             SetEntityHealth(GetPlayerPed(PlayerId()), 200)
             SetPlayerInvincible(PlayerId(), true)
+        end
+        if (settings.enableCrowdControl == "true" and settings.crowdDensity ~= nil) then
+            SetPedDensityMultiplierThisFrame(tonumber(settings.crowdDensity))
+        end
+        if (settings.enableTrafficControl == "true" and settings.trafficDensity ~= nil) then
+            SetVehicleDensityMultiplierThisFrame(tonumber(settings.trafficDensity))
+            SetRandomVehicleDensityMultiplierThisFrame(tonumber(settings.trafficDensity))
+            SetParkedVehicleDensityMultiplierThisFrame(tonumber(settings.trafficDensity))
+        end
+        if (settings.enableUnlimitedStamina == "true") then
+            ResetPlayerStamina(PlayerId())
         end
     end
 end)
