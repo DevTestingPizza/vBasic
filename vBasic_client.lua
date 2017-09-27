@@ -39,7 +39,7 @@ Citizen.CreateThread(function()
         end
         if (settings.forceGodModeEnabled == "true") and ((GetPlayerInvincible() == false)  or (GetEntityHealth(GetPlayerPed(PlayerId())) < 200)) then
             SetEntityHealth(GetPlayerPed(PlayerId()), 200)
-            SetPlayerInvincible(PlayerId(), f)
+            SetPlayerInvincible(PlayerId(), true)
         end
     end
 end)
