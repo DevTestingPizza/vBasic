@@ -52,7 +52,7 @@ function isWhitelisted(source)
         local playerIds = GetPlayerIdentifiers(source)
         for sourceId in pairs(playerIds) do
             for whitelistId in pairs(whitelist) do
-                if playerIds[sourceId] == whitelist[whitelistId] then
+                if string.lower(playerIds[sourceId]) == string.lower(whitelist[whitelistId]) then
                     whitelisted = true
                 end
             end
