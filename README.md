@@ -1,4 +1,4 @@
-# vBasic v3.0.1
+# vBasic v4.0
 Basic FiveM server settings.
 
 For installation instructions, visit [the wiki page](https://github.com/TomGrobbe/vBasic/wiki).
