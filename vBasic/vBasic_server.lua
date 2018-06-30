@@ -39,7 +39,7 @@ if (settings.enableWhitelist) then
     AddEventHandler("playerConnecting", function(playerName, setKickReason, deferrals)
         local s = source
         deferrals.defer()
-        Citizen.Wait(100)
+        Citizen.Wait(1500) -- wait 1.5 sec before checking due to some weird connection bug that occurs, making IsPayerAceAllowed always return false.
         if (not IsPlayerAceAllowed(s, "vBasic.whitelisted")) then
             deferrals.done(settings.whitelistMessage)
             CancelEvent()
